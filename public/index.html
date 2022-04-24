@@ -3,41 +3,18 @@
     <title>SF Voices</title>
 
     <script>
-      cookie = function(name) {
-        let cookie = {};
-        document.cookie.split(';').forEach(function(el) {
-        let [key,value] = el.split('=');
-        cookie[key.trim()] = value;
-        });
-        return cookie[name];
-      }
-
-      init = function() {
-        var polisId = cookie("polisId");
-        if (!polisId || polisId.length==0) {
-          polisId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-          document.cookie = "polisId=" + polisId + "; expires=Thu, 18 Dec 2040 12:00:00 UTC";
-        }
-        var d = window.document.createElement("div");
-        d.className = "polis";
-        d.setAttribute("data-conversation_id", "4664taetrc");
-        d.setAttribute("data-xid", polisId);
-        d.setAttribute("data-ucsf", "false");
-        window.document.body.insertBefore(d, window.document.body.firstChild, d);
-
-        var s = window.document.createElement("script");
-        s.src = "https://pol.is/embed.js";
-        window.document.body.appendChild(s);
-
-        var resultsDiv = window.document.createElement("div");
-        resultsDiv.className = "results";
-        window.document.body.insertBefore(d, window.document.body.firstChild, resultsDiv);
-      }
     </script>
+
+    <style> 
+    body {
+      width: 1080px;
+      height: 1920px;
+   
+    }
+    </style>
 </head>
 
-  <body onload="init();">
-    Browse the <a target="_blank" href="https://pol.is/report/r3srtpzwhaapuxmcvkne3"> full report.</a>
-    Learn more about <a target="_blank" href="/about"> SF Voices</a>
+  <body>
+    <div id="image-view"><img src="img/1.png"></div>
   </body>
 </html>
