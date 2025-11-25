@@ -3,6 +3,27 @@
     <title>EO Player</title>
 
     <script>
+      let screenId = document.URL.split("#")[1] || "";
+      var imageUrls = [];
+      for (var i = 0; i < 6; i++) {
+        imageUrls.push(`img/${screenId}/${i + 1}.png`);
+        var numImagesLoaded = 0;
+      }
+      function loadImages() {
+          var imageView = document.getElementById("image-loader");
+          for (var i = 0; i < imageUrls.length; i++) {
+              var image = document.createElement("img");
+              imageView.appendChild(image);
+              image.width = 0;
+              image.height = 0;
+              image.addEventListener("load", function() {
+                  numImagesLoaded++;
+              });
+              image.src = imageUrls[i];
+          }
+      }
+        
+        var imageIndex = 0;
 
         function setBackground(imgUrl) {
               var htmlElement = document.getElementsByTagName("html")[0];
@@ -10,11 +31,21 @@
               htmlElement.style.backgroundSize = "cover";          
         }    
         
-        function onLoad() {
-            var imgUrl = "img/1.png";
-            setBackground(imgUrl);
+        function displayImage() {
+            let imageIndex = (new Date()).getMinutes() % imageUrls.length;
+            setBackground(imageUrls[imageIndex]);
         }
-    </script>
+
+        function onLoad() {
+          loadImages();
+          setInterval(function() {
+            if (numImagesLoaded == imageUrls.length) {
+                displayImage();
+            }
+          }, 100);
+        }
+
+</script>
 
     <style> 
     body {
@@ -39,5 +70,6 @@
 </head>
 
   <body onload="onLoad();">
+    <div id="image-loader"></div>
   </body>
 </html>
